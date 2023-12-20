@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1703079872614,
+      "tag": "0000_minor_network",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1703080084836,
+      "tag": "0001_familiar_meteorite",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1703081727632,
+      "tag": "0002_handy_thor_girl",
+      "breakpoints": true
+    }
+  ]
+}
