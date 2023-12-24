@@ -49,7 +49,7 @@ const HomePage = () => {
             bg-background
           '
           >
-            Get Cypress Free
+            Get IdeaHub Free
           </Button>
         </div>
         <div
