@@ -1,22 +1,8 @@
 import { InferSelectModel } from 'drizzle-orm';
-import {
-  customers,
-  folders,
-  prices,
-  products,
-  subscriptions,
-  users,
-  workspaces,
-} from '../../../migrations/schema';
+import { customers, folders, prices, products, subscriptions, users, workspaces } from '../../../migrations/schema';
 import { files } from './schema';
 
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export interface Database {
   public: {
@@ -185,9 +171,7 @@ export interface Database {
           currency?: string | null;
           description?: string | null;
           id: string;
-          interval?:
-            | Database['public']['Enums']['pricing_plan_interval']
-            | null;
+          interval?: Database['public']['Enums']['pricing_plan_interval'] | null;
           interval_count?: number | null;
           metadata?: Json | null;
           product_id?: string | null;
@@ -200,9 +184,7 @@ export interface Database {
           currency?: string | null;
           description?: string | null;
           id?: string;
-          interval?:
-            | Database['public']['Enums']['pricing_plan_interval']
-            | null;
+          interval?: Database['public']['Enums']['pricing_plan_interval'] | null;
           interval_count?: number | null;
           metadata?: Json | null;
           product_id?: string | null;
@@ -428,6 +410,6 @@ export type Subscription = InferSelectModel<typeof subscriptions> & {
   prices: Price;
 };
 
-export type ProductWirhPrice = Product & {
+export type ProductWithPrice = Product & {
   prices?: Price[];
 };
