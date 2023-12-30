@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { ThemeProvider } from '@/lib/providers/next-theme-provider';
+import AppStateProvider from '@/lib/providers/state-provider';
 import type { Metadata } from 'next';
 import { DM_Sans } from 'next/font/google';
 import { twMerge } from 'tailwind-merge';
@@ -18,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body className={twMerge('bg-background', inter.className)}>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
-          {children}
+          <AppStateProvider>{children}</AppStateProvider>
         </ThemeProvider>
       </body>
     </html>

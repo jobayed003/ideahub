@@ -1,5 +1,4 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import React from 'react';
 
 import {
   getCollaboratingWorkspaces,
@@ -11,19 +10,14 @@ import {
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
-import { ScrollArea } from '../ui/scroll-area';
-import FoldersDropdownList from './folders-dropdown-list';
-import NativeNavigation from './native-navigation';
-import PlanUsage from './plan-usage';
-import UserCard from './user-card';
-import WorkspaceDropdown from './workspace-dropdown';
+import WorkspaceDropdown from './WorkspaceDropdown';
 
 interface SidebarProps {
   params: { workspaceId: string };
   className?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = async ({ params, className }) => {
+const Sidebar = async ({ params, className }: SidebarProps) => {
   const supabase = createServerComponentClient({ cookies });
   //user
   const {
@@ -60,6 +54,7 @@ const Sidebar: React.FC<SidebarProps> = async ({ params, className }) => {
             (workspace) => workspace.id === params.workspaceId
           )}
         />
+        {/*
         <PlanUsage foldersLength={workspaceFolderData?.length || 0} subscription={subscriptionData} />
         <NativeNavigation myWorkspaceId={params.workspaceId} />
         <ScrollArea
@@ -79,9 +74,9 @@ const Sidebar: React.FC<SidebarProps> = async ({ params, className }) => {
           z-40'
           />
           <FoldersDropdownList workspaceFolders={workspaceFolderData || []} workspaceId={params.workspaceId} />
-        </ScrollArea>
+        </ScrollArea> */}
       </div>
-      <UserCard subscription={subscriptionData} />
+      {/* <UserCard subscription={subscriptionData} /> */}
     </aside>
   );
 };
