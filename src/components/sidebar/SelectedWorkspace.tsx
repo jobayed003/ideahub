@@ -12,12 +12,13 @@ interface SelectedWorkspaceProps {
 
 const SelectedWorkspace = ({ workspace, onClick }: SelectedWorkspaceProps) => {
   const supabase = createClientComponentClient();
-  const [workspaceLogo, setWorkspaceLogo] = useState('/cypresslogo.svg');
+  const [workspaceLogo, setWorkspaceLogo] = useState('/ideahub.svg');
   useEffect(() => {
     if (workspace.logo) {
       const path = supabase.storage.from('workspace-logos').getPublicUrl(workspace.logo)?.data.publicUrl;
       setWorkspaceLogo(path);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workspace]);
   return (
     <Link
@@ -37,7 +38,7 @@ const SelectedWorkspace = ({ workspace, onClick }: SelectedWorkspaceProps) => {
       items-center 
       my-2'
     >
-      <Image src={workspaceLogo} alt='workspace logo' width={26} height={26} objectFit='cover' />
+      <Image src={workspaceLogo} alt='workspace logo' width={26} height={26} />
       <div className='flex flex-col'>
         <p
           className='text-lg 
