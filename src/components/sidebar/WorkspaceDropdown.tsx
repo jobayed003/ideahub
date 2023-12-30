@@ -69,7 +69,6 @@ const WorkspaceDropdown = ({
           bg-black/10
           backdrop-blur-lg
           group
-          overflow-scroll
           border-[1px]
           border-muted
       '
@@ -110,8 +109,7 @@ const WorkspaceDropdown = ({
               description='Workspaces give you the power to collaborate with others. You can change your workspace privacy settings after creating the workspace too.'
             >
               <div
-                className='flex 
-              transition-all 
+                className='flex transition-all 
               hover:bg-muted 
               justify-center 
               items-center 

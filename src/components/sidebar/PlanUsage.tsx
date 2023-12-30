@@ -3,7 +3,7 @@ import { MAX_FOLDERS_FREE_PLAN } from '@/lib/constants';
 import { useAppState } from '@/lib/providers/state-provider';
 import { Subscription } from '@/lib/supabase/supabase.types';
 import { useEffect, useState } from 'react';
-import CypressDiamondIcon from '../icons/cypressDiamongIcon';
+import IdeahubDiamondIcon from '../icons/ideahubDiamongIcon';
 import { Progress } from '../ui/progress';
 
 interface PlanUsageProps {
@@ -33,7 +33,7 @@ const PlanUsage = ({ foldersLength, subscription }: PlanUsageProps) => {
         '
         >
           <div className='h-4 w-4'>
-            <CypressDiamondIcon />
+            <IdeahubDiamondIcon />
           </div>
           <div
             className='flex 

@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import { Menu } from 'lucide-react';
 import React, { useState } from 'react';
-import CypressPageIcon from '../icons/cypressPageIcon';
+import CypressPageIcon from '../icons/ideahubPageIcon';
 
 interface MobileSidebarProps {
   children: React.ReactNode;

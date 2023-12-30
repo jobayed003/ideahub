@@ -1,32 +1,29 @@
 'use client';
 import { useAppState } from '@/lib/providers/state-provider';
 import { Folder } from '@/lib/supabase/supabase.types';
-import React, { useEffect, useState } from 'react';
-import TooltipComponent from '../global/tooltip-component';
-import { PlusIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
 import { useSupabaseUser } from '@/lib/providers/supabase-user-provider';
-import { v4 } from 'uuid';
 import { createFolder } from '@/lib/supabase/queries';
+import { PlusIcon } from 'lucide-react';
+import { v4 } from 'uuid';
+import ToolTip from '../global/Tooltip';
 import { useToast } from '../ui/use-toast';
-import { Accordion } from '../ui/accordion';
-import Dropdown from './Dropdown';
-import useSupabaseRealtime from '@/lib/hooks/useSupabaseRealtime';
-import { useSubscriptionModal } from '@/lib/providers/subscription-modal-provider';
 
 interface FoldersDropdownListProps {
   workspaceFolders: Folder[];
   workspaceId: string;
 }
 
-const FoldersDropdownList: React.FC<FoldersDropdownListProps> = ({ workspaceFolders, workspaceId }) => {
-  useSupabaseRealtime();
+const FoldersDropdownList = ({ workspaceFolders, workspaceId }: FoldersDropdownListProps) => {
+  // useSupabaseRealtime();
   const { state, dispatch, folderId } = useAppState();
-  const { open, setOpen } = useSubscriptionModal();
+  // const { open, setOpen } = useSubscriptionModal();
   const { toast } = useToast();
   const [folders, setFolders] = useState(workspaceFolders);
   const { subscription } = useSupabaseUser();
 
-  //effec set nitial satte server app state
+  //effect set nitial satte server app state
   useEffect(() => {
     if (workspaceFolders.length > 0) {
       dispatch({
@@ -43,17 +40,19 @@ const FoldersDropdownList: React.FC<FoldersDropdownListProps> = ({ workspaceFold
         },
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workspaceFolders, workspaceId]);
   //state
 
   useEffect(() => {
     setFolders(state.workspaces.find((workspace) => workspace.id === workspaceId)?.folders || []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   //add folder
   const addFolderHandler = async () => {
     if (folders.length >= 3 && !subscription) {
-      setOpen(true);
+      // setOpen(true);
       return;
     }
     const newFolder: Folder = {
@@ -109,7 +108,7 @@ const FoldersDropdownList: React.FC<FoldersDropdownListProps> = ({ workspaceFold
         >
           FOLDERS
         </span>
-        <TooltipComponent message='Create Folder'>
+        <ToolTip message='Create Folder'>
           <PlusIcon
             onClick={addFolderHandler}
             size={16}
@@ -119,15 +118,8 @@ const FoldersDropdownList: React.FC<FoldersDropdownListProps> = ({ workspaceFold
             hover:dark:text-white
           '
           />
-        </TooltipComponent>
+        </ToolTip>
       </div>
-      <Accordion type='multiple' defaultValue={[folderId || '']} className='pb-20'>
-        {folders
-          .filter((folder) => !folder.inTrash)
-          .map((folder) => (
-            <Dropdown key={folder.id} title={folder.title} listType='folder' id={folder.id} iconId={folder.iconId} />
-          ))}
-      </Accordion>
     </>
   );
 };

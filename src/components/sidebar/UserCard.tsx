@@ -4,7 +4,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import db from '@/lib/supabase/db';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import CypressProfileIcon from '../icons/cypressProfileIcon';
+import CypressProfileIcon from '../icons/ideahubProfileIcon';
 import ModeToggle from '../global/mode-toggle';
 import { LogOut } from 'lucide-react';
 import LogoutButton from '../global/logout-button';
