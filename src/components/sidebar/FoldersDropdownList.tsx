@@ -6,9 +6,12 @@ import { useEffect, useState } from 'react';
 import { useSupabaseUser } from '@/lib/providers/supabase-user-provider';
 import { createFolder } from '@/lib/supabase/queries';
 import { PlusIcon } from 'lucide-react';
+// @ts-ignore
 import { v4 } from 'uuid';
-import ToolTip from '../global/Tooltip';
+import ToolTip from '../global/ToolTip';
+import { Accordion } from '../ui/accordion';
 import { useToast } from '../ui/use-toast';
+import Dropdown from './Dropdown';
 
 interface FoldersDropdownListProps {
   workspaceFolders: Folder[];
@@ -112,14 +115,17 @@ const FoldersDropdownList = ({ workspaceFolders, workspaceId }: FoldersDropdownL
           <PlusIcon
             onClick={addFolderHandler}
             size={16}
-            className='group-hover/title:inline-block
-            hidden 
-            cursor-pointer
-            hover:dark:text-white
-          '
+            className='group-hover/title:inline-block hidden cursor-pointer hover:dark:text-white'
           />
         </ToolTip>
       </div>
+      <Accordion type='multiple' defaultValue={[folderId || '']} className='pb-20'>
+        {folders
+          .filter((folder) => !folder.inTrash)
+          .map((folder) => (
+            <Dropdown key={folder.id} title={folder.title} listType='folder' id={folder.id} iconId={folder.iconId} />
+          ))}
+      </Accordion>
     </>
   );
 };

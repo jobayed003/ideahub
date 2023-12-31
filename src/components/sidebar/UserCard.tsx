@@ -1,13 +1,13 @@
-import React from 'react';
+import db from '@/lib/supabase/db';
 import { Subscription } from '@/lib/supabase/supabase.types';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import db from '@/lib/supabase/db';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import React from 'react';
 import CypressProfileIcon from '../icons/ideahubProfileIcon';
-import ModeToggle from '../global/mode-toggle';
-import { LogOut } from 'lucide-react';
-import LogoutButton from '../global/logout-button';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+
+import LogoutButton from '../global/LogoutButton';
+import ModeToggle from '../global/ModeToggle';
 
 interface UserCardProps {
   subscription: Subscription | null;
@@ -66,9 +66,7 @@ const UserCard: React.FC<UserCardProps> = async ({ subscription }) => {
         </div>
       </aside>
       <div className='flex items-center justify-center'>
-        <LogoutButton>
-          <LogOut />
-        </LogoutButton>
+        <LogoutButton>{/* <LogOut /> */}</LogoutButton>
         <ModeToggle />
       </div>
     </article>

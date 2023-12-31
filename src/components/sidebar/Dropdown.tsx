@@ -7,10 +7,12 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import clsx from 'clsx';
 import { PlusIcon, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React, { useMemo, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
+// @ts-ignore
 import { v4 } from 'uuid';
-import EmojiPicker from '../global/emoji-picker';
-import TooltipComponent from '../global/tooltip-component';
+
+import EmojiPicker from '../global/EmojiPicker';
+import ToolTip from '../global/ToolTip';
 import { AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { useToast } from '../ui/use-toast';
 
@@ -19,11 +21,11 @@ interface DropdownProps {
   id: string;
   listType: 'folder' | 'file';
   iconId: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
   disabled?: boolean;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, children, disabled, ...props }) => {
+const Dropdown = ({ title, id, listType, iconId, children, disabled, ...props }: DropdownProps) => {
   const supabase = createClientComponentClient();
   const { toast } = useToast();
   const { user } = useSupabaseUser();
@@ -31,7 +33,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, childr
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
-  //folder Title synced with server data and local
+  //folder Title synced with server data and local data
   const folderTitle: string | undefined = useMemo(() => {
     if (listType === 'folder') {
       const stateTitle = state.workspaces
@@ -51,6 +53,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, childr
         .find((workspace) => workspace.id === workspaceId)
         ?.folders.find((folder) => folder.id === fileAndFolderId[0])
         ?.files.find((file) => file.id === fileAndFolderId[1])?.title;
+
       if (title === stateTitle || !stateTitle) return title;
       return stateTitle;
     }
@@ -234,6 +237,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, childr
         'group-hover/file:block': listType === 'file',
         'group-hover/folder:block': listType === 'folder',
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isFolder]
   );
 
@@ -280,10 +284,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, childr
     >
       <AccordionTrigger
         id={listType}
-        className='hover:no-underline 
-        p-2 
-        dark:text-muted-foreground 
-        text-sm'
+        className='hover:no-underline p-2 dark:text-muted-foreground text-sm'
         disabled={listType === 'file'}
       >
         <div className={groupIdentifies}>
@@ -311,21 +312,21 @@ const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, childr
             />
           </div>
           <div className={hoverStyles}>
-            <TooltipComponent message='Delete Folder'>
+            <ToolTip message='Delete Folder'>
               <Trash
                 onClick={moveToTrash}
                 size={15}
                 className='hover:dark:text-white dark:text-Neutrals/neutrals-7 transition-colors'
               />
-            </TooltipComponent>
+            </ToolTip>
             {listType === 'folder' && !isEditing && (
-              <TooltipComponent message='Add File'>
+              <ToolTip message='Add File'>
                 <PlusIcon
                   onClick={addNewFile}
                   size={15}
                   className='hover:dark:text-white dark:text-Neutrals/neutrals-7 transition-colors'
                 />
-              </TooltipComponent>
+              </ToolTip>
             )}
           </div>
         </div>
