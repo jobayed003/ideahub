@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic';
 
+import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/lib/providers/next-theme-provider';
 import AppStateProvider from '@/lib/providers/state-provider';
 import { SupabaseUserProvider } from '@/lib/providers/supabase-user-provider';
@@ -21,7 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={twMerge('bg-background', inter.className)}>
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
           <AppStateProvider>
-            <SupabaseUserProvider>{children}</SupabaseUserProvider>
+            <SupabaseUserProvider>
+              {children}
+              <Toaster />
+            </SupabaseUserProvider>
           </AppStateProvider>
         </ThemeProvider>
       </body>

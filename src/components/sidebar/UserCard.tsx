@@ -6,6 +6,7 @@ import React from 'react';
 import CypressProfileIcon from '../icons/ideahubProfileIcon';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
+import { LogOut } from 'lucide-react';
 import LogoutButton from '../global/LogoutButton';
 import ModeToggle from '../global/ModeToggle';
 
@@ -66,7 +67,9 @@ const UserCard: React.FC<UserCardProps> = async ({ subscription }) => {
         </div>
       </aside>
       <div className='flex items-center justify-center'>
-        <LogoutButton>{/* <LogOut /> */}</LogoutButton>
+        <LogoutButton>
+          <LogOut />
+        </LogoutButton>
         <ModeToggle />
       </div>
     </article>

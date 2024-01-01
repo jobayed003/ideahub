@@ -46,8 +46,8 @@ const FoldersDropdownList = ({ workspaceFolders, workspaceId }: FoldersDropdownL
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workspaceFolders, workspaceId]);
   //state
-
-  useEffect(() => {
+  //localhost:3000/dashboard/863cc1ac-9fff-4725-b3dc-a836d0379e71/04318880-5595-4cfc-b3d6-2af38324413b/729f395e-501c-4804-a146-dd020375afd7
+  http: useEffect(() => {
     setFolders(state.workspaces.find((workspace) => workspace.id === workspaceId)?.folders || []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);

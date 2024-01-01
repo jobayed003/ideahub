@@ -10,11 +10,12 @@ import {
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
-import PlanUsage from './PlanUsage';
-import WorkspaceDropdown from './WorkspaceDropdown';
-import NativeNavigation from './NativeNavigation';
 import { ScrollArea } from '../ui/scroll-area';
 import FoldersDropdownList from './FoldersDropdownList';
+import NativeNavigation from './NativeNavigation';
+import PlanUsage from './PlanUsage';
+import UserCard from './UserCard';
+import WorkspaceDropdown from './WorkspaceDropdown';
 
 interface SidebarProps {
   params: { workspaceId: string };
@@ -80,7 +81,7 @@ const Sidebar = async ({ params, className }: SidebarProps) => {
           <FoldersDropdownList workspaceFolders={workspaceFolderData || []} workspaceId={params.workspaceId} />
         </ScrollArea>
       </div>
-      {/* <UserCard subscription={subscriptionData} /> */}
+      <UserCard subscription={subscriptionData} />
     </aside>
   );
 };
