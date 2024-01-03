@@ -107,7 +107,7 @@ const Dropdown = ({ title, id, listType, iconId, children, disabled, ...props }:
 
   //onchanges
   const onChangeEmoji = async (selectedEmoji: string) => {
-    if (!workspaceId) return;
+    if (!workspaceId || !folderId) return;
     if (listType === 'folder') {
       dispatch({
         type: 'UPDATE_FOLDER',
@@ -128,6 +128,32 @@ const Dropdown = ({ title, id, listType, iconId, children, disabled, ...props }:
         toast({
           title: 'Success',
           description: 'Update emoji for the folder',
+        });
+      }
+    }
+
+    if (listType === 'file') {
+      const fileId = id.split('folder')[1];
+      dispatch({
+        type: 'UPDATE_FILE',
+        payload: {
+          file: { iconId: selectedEmoji },
+          workspaceId,
+          folderId,
+          fileId,
+        },
+      });
+      const { error } = await updateFile({ iconId: selectedEmoji }, fileId);
+      if (error) {
+        toast({
+          title: 'Error',
+          variant: 'destructive',
+          description: 'Could not update the emoji for this file',
+        });
+      } else {
+        toast({
+          title: 'Success',
+          description: 'Update emoji for the file',
         });
       }
     }

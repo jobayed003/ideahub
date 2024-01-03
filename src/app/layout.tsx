@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/lib/providers/next-theme-provider';
+import { SocketProvider } from '@/lib/providers/socket-provider';
 import AppStateProvider from '@/lib/providers/state-provider';
 import { SupabaseUserProvider } from '@/lib/providers/supabase-user-provider';
 import type { Metadata } from 'next';
@@ -23,8 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
           <AppStateProvider>
             <SupabaseUserProvider>
-              {children}
-              <Toaster />
+              <SocketProvider>
+                {children}
+                <Toaster />
+              </SocketProvider>
             </SupabaseUserProvider>
           </AppStateProvider>
         </ThemeProvider>
