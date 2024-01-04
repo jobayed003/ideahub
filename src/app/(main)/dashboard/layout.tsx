@@ -1,3 +1,4 @@
+import { SubscriptionModalProvider } from '@/lib/providers/subscription-modal-provider';
 import React from 'react';
 
 interface LayoutProps {
@@ -5,8 +6,14 @@ interface LayoutProps {
   params: any;
 }
 
-const Layout = ({ children, params }: LayoutProps) => {
-  return <main className='flex over-hidden h-screen'>{children}</main>;
+const Layout = async ({ children, params }: LayoutProps) => {
+  // const { data: products, error } = await getActiveProductsWithPrice();
+  // if (error) throw new Error();
+  return (
+    <main className='flex over-hidden h-screen'>
+      <SubscriptionModalProvider products={[]}>{children}</SubscriptionModalProvider>
+    </main>
+  );
 };
 
 export default Layout;

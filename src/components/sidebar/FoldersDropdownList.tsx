@@ -3,9 +3,11 @@ import { useAppState } from '@/lib/providers/state-provider';
 import { Folder } from '@/lib/supabase/supabase.types';
 import { useEffect, useState } from 'react';
 
+import useSupabaseRealtime from '@/lib/hooks/useSupabaseRealtime';
 import { useSupabaseUser } from '@/lib/providers/supabase-user-provider';
 import { createFolder } from '@/lib/supabase/queries';
 import { PlusIcon } from 'lucide-react';
+import { useSubscriptionModal } from '@/lib/providers/subscription-modal-provider';
 // @ts-ignore
 import { v4 } from 'uuid';
 import ToolTip from '../global/ToolTip';
@@ -19,14 +21,14 @@ interface FoldersDropdownListProps {
 }
 
 const FoldersDropdownList = ({ workspaceFolders, workspaceId }: FoldersDropdownListProps) => {
-  // useSupabaseRealtime();
+  useSupabaseRealtime();
   const { state, dispatch, folderId } = useAppState();
-  // const { open, setOpen } = useSubscriptionModal();
+  const { open, setOpen } = useSubscriptionModal();
   const { toast } = useToast();
   const [folders, setFolders] = useState(workspaceFolders);
   const { subscription } = useSupabaseUser();
 
-  //effect set nitial satte server app state
+  //effect set intial satte server app state
   useEffect(() => {
     if (workspaceFolders.length > 0) {
       dispatch({
@@ -46,8 +48,7 @@ const FoldersDropdownList = ({ workspaceFolders, workspaceId }: FoldersDropdownL
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workspaceFolders, workspaceId]);
   //state
-  //localhost:3000/dashboard/863cc1ac-9fff-4725-b3dc-a836d0379e71/04318880-5595-4cfc-b3d6-2af38324413b/729f395e-501c-4804-a146-dd020375afd7
-  http: useEffect(() => {
+  useEffect(() => {
     setFolders(state.workspaces.find((workspace) => workspace.id === workspaceId)?.folders || []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
@@ -55,7 +56,7 @@ const FoldersDropdownList = ({ workspaceFolders, workspaceId }: FoldersDropdownL
   //add folder
   const addFolderHandler = async () => {
     if (folders.length >= 3 && !subscription) {
-      // setOpen(true);
+      setOpen(true);
       return;
     }
     const newFolder: Folder = {

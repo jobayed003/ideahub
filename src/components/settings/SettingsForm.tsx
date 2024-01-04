@@ -37,6 +37,7 @@ import { ScrollArea } from '../ui/scroll-area';
 
 import Link from 'next/link';
 
+import { useSubscriptionModal } from '@/lib/providers/subscription-modal-provider';
 import { postData } from '@/lib/utils';
 import CollaboratorSearch from '../global/CollaboratorSearch';
 import LogoutButton from '../global/LogoutButton';
@@ -45,7 +46,7 @@ import IdeahubProfileIcon from '../icons/ideahubProfileIcon';
 const SettingsForm = () => {
   const { toast } = useToast();
   const { user, subscription } = useSupabaseUser();
-  // const { open, setOpen } = useSubscriptionModal();
+  const { open, setOpen } = useSubscriptionModal();
   const router = useRouter();
   const supabase = createClientComponentClient();
   const { state, workspaceId, dispatch } = useAppState();
@@ -77,7 +78,7 @@ const SettingsForm = () => {
   const addCollaborator = async (profile: User) => {
     if (!workspaceId) return;
     if (subscription?.status !== 'active' && collaborators.length >= 2) {
-      // setOpen(true);
+      setOpen(true);
       return;
     }
     await addCollaborators([profile], workspaceId);
@@ -388,13 +389,7 @@ const SettingsForm = () => {
           </div>
         ) : (
           <div>
-            <Button
-              type='button'
-              size='sm'
-              variant={'secondary'}
-              className='text-sm'
-              // onClick={() => setOpen(true)}
-            >
+            <Button type='button' size='sm' variant={'secondary'} className='text-sm' onClick={() => setOpen(true)}>
               Start Plan
             </Button>
           </div>

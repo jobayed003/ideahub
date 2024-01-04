@@ -131,8 +131,8 @@ const QuillEditor = ({ dirDetails, dirType, fileId }: QuillEditorProps) => {
       const editor = document.createElement('div');
       wrapper.append(editor);
       const Quill = (await import('quill')).default;
-      // const QuillCursors = (await import('quill-cursors')).default;
-      // Quill.register('modules/cursors', QuillCursors);
+      const QuillCursors = (await import('quill-cursors')).default;
+      Quill.register('modules/cursors', QuillCursors);
       const q = new Quill(editor, {
         theme: 'snow',
         modules: {
@@ -359,6 +359,7 @@ const QuillEditor = ({ dirDetails, dirType, fileId }: QuillEditorProps) => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
       setSaving(true);
       const contents = quill.getContents();
+
       const quillLength = quill.getLength();
       saveTimerRef.current = setTimeout(async () => {
         if (contents && quillLength !== 1 && fileId) {
@@ -412,6 +413,7 @@ const QuillEditor = ({ dirDetails, dirType, fileId }: QuillEditorProps) => {
     };
   }, [quill, socket, fileId, user, details, folderId, workspaceId, dispatch]);
 
+  // receiving changes from socket
   useEffect(() => {
     if (quill === null || socket === null) return;
     const socketHandler = (deltas: any, id: string) => {
@@ -425,6 +427,7 @@ const QuillEditor = ({ dirDetails, dirType, fileId }: QuillEditorProps) => {
     };
   }, [quill, socket, fileId]);
 
+  // Creating the room for cursors movement
   useEffect(() => {
     if (!fileId || quill === null) return;
     const room = supabase.channel(fileId);
