@@ -1,6 +1,5 @@
 'use server';
 import { and, eq, ilike, notExists } from 'drizzle-orm';
-// @ts-ignore
 import { validate } from 'uuid';
 import { files, folders, users, workspaces } from '../../../migrations/schema';
 import db from './db';

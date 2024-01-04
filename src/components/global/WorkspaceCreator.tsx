@@ -5,7 +5,6 @@ import { User, workspace } from '@/lib/supabase/supabase.types';
 import { Lock, Plus, Share } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-// @ts-ignore
 import { v4 } from 'uuid';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';

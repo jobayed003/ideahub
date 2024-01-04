@@ -8,7 +8,6 @@ import { useSupabaseUser } from '@/lib/providers/supabase-user-provider';
 import { createFolder } from '@/lib/supabase/queries';
 import { PlusIcon } from 'lucide-react';
 import { useSubscriptionModal } from '@/lib/providers/subscription-modal-provider';
-// @ts-ignore
 import { v4 } from 'uuid';
 import ToolTip from '../global/ToolTip';
 import { Accordion } from '../ui/accordion';

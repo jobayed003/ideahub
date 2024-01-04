@@ -8,9 +8,7 @@ import clsx from 'clsx';
 import { PlusIcon, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useMemo, useState } from 'react';
-// @ts-ignore
 import { v4 } from 'uuid';
-
 import EmojiPicker from '../global/EmojiPicker';
 import ToolTip from '../global/ToolTip';
 import { AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';

@@ -23,7 +23,6 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Briefcase, CreditCard, ExternalLink, Lock, LogOut, Plus, Share, User as UserIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-//@ts-ignore
 import { v4 } from 'uuid';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
