@@ -1,6 +1,7 @@
 'use client';
 import { useSubscriptionModal } from '@/lib/providers/subscription-modal-provider';
 import { useSupabaseUser } from '@/lib/providers/supabase-user-provider';
+import { getStripe } from '@/lib/stripe/stripeClient';
 import { Price, ProductWithPrice } from '@/lib/supabase/supabase.types';
 import { formatPrice, postData } from '@/lib/utils';
 import React, { useState } from 'react';
@@ -13,7 +14,7 @@ interface SubscriptionModalProps {
   products: ProductWithPrice[];
 }
 
-const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ products }) => {
+const SubscriptionModal = ({ products }: SubscriptionModalProps) => {
   const { open, setOpen } = useSubscriptionModal();
   const { toast } = useToast();
   const { subscription, user } = useSupabaseUser();
@@ -38,8 +39,8 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ products }) => {
       });
 
       console.log('Getting Checkout for stripe');
-      //   const stripe = await getStripe();
-      //   stripe?.redirectToCheckout({ sessionId });
+      const stripe = await getStripe();
+      stripe?.redirectToCheckout({ sessionId });
     } catch (error) {
       toast({ title: 'Oppse! Something went wrong.', variant: 'destructive' });
     } finally {

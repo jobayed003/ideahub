@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import { bigint, boolean, integer, jsonb, pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const keyStatus = pgEnum('key_status', ['expired', 'invalid', 'valid', 'default']);
@@ -157,3 +157,14 @@ export const subscriptions = pgTable('subscriptions', {
     mode: 'string',
   }).default(sql`now()`),
 });
+
+export const productsRelations = relations(products, ({ many }) => ({
+  prices: many(prices),
+}));
+
+export const pricesRelations = relations(prices, ({ one }) => ({
+  product: one(products, {
+    fields: [prices.productId],
+    references: [products.id],
+  }),
+}));

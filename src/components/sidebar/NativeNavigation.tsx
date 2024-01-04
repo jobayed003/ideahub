@@ -17,12 +17,7 @@ const NativeNavigation = ({ myWorkspaceId, className }: NativeNavigationProps) =
       <ul className='flex flex-col gap-2'>
         <li>
           <Link
-            className='group/native
-            flex
-            text-Neutrals/neutrals-7
-            transition-all
-            gap-2
-          '
+            className='group/native flex text-Neutrals/neutrals-7 transition-all gap-2'
             href={`/dashboard/${myWorkspaceId}`}
           >
             <IdeahubHomeIcon />
